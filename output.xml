@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.3 (Python 3.10.2 on darwin)" generated="20220303 20:57:25.398" rpa="false" schemaversion="2">
+<suite id="s1" name="Test" source="/Users/vikram/PycharmProjects/robotframework/test.robot">
+<kw name="Open Browser" library="SeleniumLibrary" type="SETUP">
+<arg>${URL}</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20220303 20:57:26.173" level="INFO">Opening browser 'Chrome' to base url 'http://www.google.co.nz'.</msg>
+<status status="PASS" starttime="20220303 20:57:26.172" endtime="20220303 20:57:37.659"/>
+</kw>
+<test id="s1-t1" name="Google Search for &quot;Maui&quot; and verify Link &quot;maui-rentals.com&quot;">
+<kw name="Given User is on Google search page">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${Locator_Search}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220303 20:57:37.665" endtime="20220303 20:57:37.730"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:37.664" endtime="20220303 20:57:37.730"/>
+</kw>
+<kw name="When User search for Maui" sourcename="User search for ${Search_text}">
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${Search_text}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220303 20:57:37.732" level="INFO">${Search_text} = Maui</msg>
+<status status="PASS" starttime="20220303 20:57:37.732" endtime="20220303 20:57:37.732"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${Locator_Search}</arg>
+<arg>${Search_text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220303 20:57:37.733" level="INFO">Typing text 'Maui' into text field 'name:q'.</msg>
+<status status="PASS" starttime="20220303 20:57:37.732" endtime="20220303 20:57:38.013"/>
+</kw>
+<kw name="Wait Until Element Does Not Contain" library="SeleniumLibrary">
+<arg>${Locator_Search}</arg>
+<arg>${Search_text}</arg>
+<doc>Waits until the element ``locator`` does not contain ``text``.</doc>
+<status status="PASS" starttime="20220303 20:57:38.014" endtime="20220303 20:57:38.049"/>
+</kw>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>${Locator_Search}</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20220303 20:57:38.050" level="INFO">Sending key(s) ('RETURN',) to name:q element.</msg>
+<msg timestamp="20220303 20:57:38.398" level="INFO">Pressing special key RETURN to element.</msg>
+<msg timestamp="20220303 20:57:38.398" level="INFO">Releasing special key RETURN.</msg>
+<status status="PASS" starttime="20220303 20:57:38.049" endtime="20220303 20:57:42.348"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:37.731" endtime="20220303 20:57:42.348"/>
+</kw>
+<kw name="Then Page should have link of maui-rentals.com" sourcename="Page should have link of ${Match_link_text_url}">
+<kw name="Get list of links on page for search text">
+<var>${list_links}</var>
+<arg>${Search_text}</arg>
+<kw name="Wait Until Location Contains" library="SeleniumLibrary">
+<arg>${match_text}</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" starttime="20220303 20:57:42.352" endtime="20220303 20:57:42.383"/>
+</kw>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220303 20:57:42.693" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-38.png"&gt;&lt;img src="selenium-screenshot-38.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220303 20:57:42.384" endtime="20220303 20:57:42.693"/>
+</kw>
+<kw name="Get WebElements" library="SeleniumLibrary">
+<var>${list_of_links}</var>
+<arg>partial link:${match_text}</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<msg timestamp="20220303 20:57:43.249" level="INFO">${list_of_links} = [&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="fa7e2c64-720f-41b9-a289-968246bd76f6")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (sessi...</msg>
+<status status="PASS" starttime="20220303 20:57:42.694" endtime="20220303 20:57:43.249"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${text_url_in_links}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220303 20:57:43.250" level="INFO">${text_url_in_links} = []</msg>
+<status status="PASS" starttime="20220303 20:57:43.249" endtime="20220303 20:57:43.250"/>
+</kw>
+<for flavor="IN">
+<var>${x}</var>
+<value>@{list_of_links}</value>
+<iter>
+<var name="${x}">&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="fa7e2c64-720f-41b9-a289-968246bd76f6")&gt;</var>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${x}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20220303 20:57:43.252" endtime="20220303 20:57:43.741"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${x}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20220303 20:57:43.772" level="INFO">${y} = None</msg>
+<status status="PASS" starttime="20220303 20:57:43.742" endtime="20220303 20:57:43.773"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${text_url_in_links}</arg>
+<arg>${y}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:43.773" endtime="20220303 20:57:43.775"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:43.252" endtime="20220303 20:57:43.775"/>
+</iter>
+<iter>
+<var name="${x}">&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="e45bd0c4-ae2c-4bca-a890-75cff6da2b8d")&gt;</var>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${x}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20220303 20:57:43.775" endtime="20220303 20:57:44.142"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${x}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20220303 20:57:44.174" level="INFO">${y} = None</msg>
+<status status="PASS" starttime="20220303 20:57:44.142" endtime="20220303 20:57:44.174"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${text_url_in_links}</arg>
+<arg>${y}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:44.175" endtime="20220303 20:57:44.175"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:43.775" endtime="20220303 20:57:44.175"/>
+</iter>
+<iter>
+<var name="${x}">&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="7a4a8c65-4e5c-4a5c-8cfa-cdc70ca55e39")&gt;</var>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${x}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20220303 20:57:44.176" endtime="20220303 20:57:44.450"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${x}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20220303 20:57:44.465" level="INFO">${y} = None</msg>
+<status status="PASS" starttime="20220303 20:57:44.451" endtime="20220303 20:57:44.465"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${text_url_in_links}</arg>
+<arg>${y}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:44.465" endtime="20220303 20:57:44.466"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:44.176" endtime="20220303 20:57:44.466"/>
+</iter>
+<iter>
+<var name="${x}">&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="26103026-e2c9-4704-a563-5aeb5c6765ed")&gt;</var>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${x}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20220303 20:57:44.466" endtime="20220303 20:57:44.786"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${x}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20220303 20:57:44.807" level="INFO">${y} = https://www.maui-rentals.com/nz/en</msg>
+<status status="PASS" starttime="20220303 20:57:44.786" endtime="20220303 20:57:44.807"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${text_url_in_links}</arg>
+<arg>${y}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:44.807" endtime="20220303 20:57:44.808"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:44.466" endtime="20220303 20:57:44.808"/>
+</iter>
+<iter>
+<var name="${x}">&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="04c51343-0f63-430c-b33b-11e094e7cbad")&gt;</var>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${x}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20220303 20:57:44.808" endtime="20220303 20:57:45.163"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${x}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20220303 20:57:45.184" level="INFO">${y} = https://www.hawaiinewsnow.com/2022/03/02/woman-dies-after-being-caught-rip-current-off-maui-shoreline/</msg>
+<status status="PASS" starttime="20220303 20:57:45.164" endtime="20220303 20:57:45.184"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${text_url_in_links}</arg>
+<arg>${y}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:45.184" endtime="20220303 20:57:45.186"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:44.808" endtime="20220303 20:57:45.186"/>
+</iter>
+<iter>
+<var name="${x}">&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="fff26b9e-7ed0-48c7-8004-2c4a6ea850b2")&gt;</var>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${x}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20220303 20:57:45.187" endtime="20220303 20:57:45.482"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${x}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20220303 20:57:45.497" level="INFO">${y} = https://www.hawaiinewsnow.com/2022/02/28/maui-man-wanted-felony-burglary-warrant-sought-by-police/</msg>
+<status status="PASS" starttime="20220303 20:57:45.483" endtime="20220303 20:57:45.497"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${text_url_in_links}</arg>
+<arg>${y}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:45.498" endtime="20220303 20:57:45.498"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:45.186" endtime="20220303 20:57:45.498"/>
+</iter>
+<iter>
+<var name="${x}">&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="0662af32-d3d1-4ec9-b8f4-9d0512787946")&gt;</var>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${x}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20220303 20:57:45.499" endtime="20220303 20:57:45.794"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${x}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20220303 20:57:45.813" level="INFO">${y} = https://mauinow.com/2022/03/01/breaking-hawai%CA%BBis-safe-travels-program-to-end-after-march-25-door-left-open-to-potentially-extend-indoor-masking/</msg>
+<status status="PASS" starttime="20220303 20:57:45.795" endtime="20220303 20:57:45.814"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${text_url_in_links}</arg>
+<arg>${y}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:45.814" endtime="20220303 20:57:45.818"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:45.499" endtime="20220303 20:57:45.818"/>
+</iter>
+<iter>
+<var name="${x}">&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="318f1139-f40d-4509-9f75-b11fe8c68f71")&gt;</var>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${x}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20220303 20:57:45.818" endtime="20220303 20:57:46.117"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${x}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20220303 20:57:46.140" level="INFO">${y} = https://www.google.co.nz/search?source=univ&amp;tbm=isch&amp;q=Maui&amp;fir=MHibk7qG_Izs4M%252C7jo9gsNVWqlLRM%252C_%253ByoMKokiIwIBJKM%252C04bSlGOEdKUXMM%252C_%253BctaHafVha01qkM%252Chd_4RuGiqJE1qM%252C_%253BOIh4...</msg>
+<status status="PASS" starttime="20220303 20:57:46.118" endtime="20220303 20:57:46.140"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${text_url_in_links}</arg>
+<arg>${y}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:46.141" endtime="20220303 20:57:46.142"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:45.818" endtime="20220303 20:57:46.142"/>
+</iter>
+<iter>
+<var name="${x}">&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="79673a93-ff20-4f7f-b9e7-98d1f439c8b0")&gt;</var>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${x}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20220303 20:57:46.143" endtime="20220303 20:57:46.435"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${x}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20220303 20:57:46.449" level="INFO">${y} = https://www.gohawaii.com/islands/maui</msg>
+<status status="PASS" starttime="20220303 20:57:46.436" endtime="20220303 20:57:46.449"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${text_url_in_links}</arg>
+<arg>${y}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:46.449" endtime="20220303 20:57:46.450"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:46.142" endtime="20220303 20:57:46.450"/>
+</iter>
+<iter>
+<var name="${x}">&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="cc92ca26-9e68-4f12-962e-e74af0677bdc")&gt;</var>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${x}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20220303 20:57:46.450" endtime="20220303 20:57:46.807"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${x}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20220303 20:57:46.828" level="INFO">${y} = https://www.tripadvisor.co.nz/Tourism-g29220-Maui_Hawaii-Vacations.html</msg>
+<status status="PASS" starttime="20220303 20:57:46.808" endtime="20220303 20:57:46.828"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${text_url_in_links}</arg>
+<arg>${y}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:46.829" endtime="20220303 20:57:46.829"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:46.450" endtime="20220303 20:57:46.829"/>
+</iter>
+<iter>
+<var name="${x}">&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="33c56eb0-388b-496c-a73a-cfe493be8cc6")&gt;</var>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${x}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20220303 20:57:46.829" endtime="20220303 20:57:47.111"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${x}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20220303 20:57:47.130" level="INFO">${y} = https://www.hawaiianairlines.co.nz/island-guide/maui</msg>
+<status status="PASS" starttime="20220303 20:57:47.112" endtime="20220303 20:57:47.130"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${text_url_in_links}</arg>
+<arg>${y}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:47.131" endtime="20220303 20:57:47.131"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:46.829" endtime="20220303 20:57:47.131"/>
+</iter>
+<iter>
+<var name="${x}">&lt;selenium.webdriver.remote.webelement.WebElement (session="401dbc6539704a97c432b16156a47b56", element="9831f14d-dc5a-4aa7-82c7-f024cee3643f")&gt;</var>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${x}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" starttime="20220303 20:57:47.132" endtime="20220303 20:57:47.417"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${x}</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20220303 20:57:47.434" level="INFO">${y} = https://www.tourmaui.com/maui-demigod/</msg>
+<status status="PASS" starttime="20220303 20:57:47.417" endtime="20220303 20:57:47.434"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${text_url_in_links}</arg>
+<arg>${y}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:47.434" endtime="20220303 20:57:47.435"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:47.131" endtime="20220303 20:57:47.436"/>
+</iter>
+<status status="PASS" starttime="20220303 20:57:43.250" endtime="20220303 20:57:47.438"/>
+</for>
+<msg timestamp="20220303 20:57:47.439" level="INFO">${list_links} = [None, None, None, 'https://www.maui-rentals.com/nz/en', 'https://www.hawaiinewsnow.com/2022/03/02/woman-dies-after-being-caught-rip-current-off-maui-shoreline/', 'https://www.hawaiinewsnow.com/2022/0...</msg>
+<status status="PASS" starttime="20220303 20:57:42.350" endtime="20220303 20:57:47.439"/>
+</kw>
+<kw name="Log List" library="Collections">
+<arg>${list_links}</arg>
+<doc>Logs the length and contents of the ``list`` using given ``level``.</doc>
+<msg timestamp="20220303 20:57:47.440" level="INFO">List length is 12 and it contains following items:
+0: None
+1: None
+2: None
+3: https://www.maui-rentals.com/nz/en
+4: https://www.hawaiinewsnow.com/2022/03/02/woman-dies-after-being-caught-rip-current-off-maui-shoreline/
+5: https://www.hawaiinewsnow.com/2022/02/28/maui-man-wanted-felony-burglary-warrant-sought-by-police/
+6: https://mauinow.com/2022/03/01/breaking-hawai%CA%BBis-safe-travels-program-to-end-after-march-25-door-left-open-to-potentially-extend-indoor-masking/
+7: https://www.google.co.nz/search?source=univ&amp;tbm=isch&amp;q=Maui&amp;fir=MHibk7qG_Izs4M%252C7jo9gsNVWqlLRM%252C_%253ByoMKokiIwIBJKM%252C04bSlGOEdKUXMM%252C_%253BctaHafVha01qkM%252Chd_4RuGiqJE1qM%252C_%253BOIh4Lh3o7CawaM%252CwEcezNU4vEG28M%252C_%253BCd6ifsTdQAAufM%252CGZhx_UQ6EtE_jM%252C_%253Byb4RBq033JuoFM%252C591WgdoT9kWcCM%252C_%253BuvVot30KwCdubM%252CrVkUCQsYXRruUM%252C_%253B1su3n4RUzeQp5M%252Ct4zPXhSx7QKAYM%252C_%253BxqMvQpHAGD9hHM%252Ck7VjNr1mRW4JiM%252C_%253BqSVXWZRd3Ly3nM%252Cwc36ZFpDG9R7PM%252C_%253BH5P68S6Aou5oDM%252C5DqxYahOo11fSM%252C_%253Br-ZZI0-6KbmRxM%252CwEcezNU4vEG28M%252C_&amp;usg=AI4_-kRMSEQc7OQxA_Y62SpFXyXfrdZxRg&amp;sa=X&amp;ved=2ahUKEwifr-yDvKn2AhWrS2wGHVYVCBEQjJkEegQILxAC
+8: https://www.gohawaii.com/islands/maui
+9: https://www.tripadvisor.co.nz/Tourism-g29220-Maui_Hawaii-Vacations.html
+10: https://www.hawaiianairlines.co.nz/island-guide/maui
+11: https://www.tourmaui.com/maui-demigod/</msg>
+<status status="PASS" starttime="20220303 20:57:47.439" endtime="20220303 20:57:47.440"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${list_links}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20220303 20:57:47.441" level="INFO">Length is 12</msg>
+<status status="PASS" starttime="20220303 20:57:47.440" endtime="20220303 20:57:47.441"/>
+</kw>
+<kw name="List Should Contain Value" library="Collections">
+<arg>${list_links}</arg>
+<arg>https://www.${Match_link_text_url}/nz/en</arg>
+<doc>Fails if the ``value`` is not found from ``list``.</doc>
+<status status="PASS" starttime="20220303 20:57:47.441" endtime="20220303 20:57:47.442"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:42.349" endtime="20220303 20:57:47.442"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:37.660" endtime="20220303 20:57:47.443"/>
+</test>
+<test id="s1-t2" name="Google Search for &quot;Brtiz&quot; and verify Link &quot;britz.com&quot;">
+<kw name="Given User is on Google search page">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${Locator_Search}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220303 20:57:47.457" endtime="20220303 20:57:47.630"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:47.457" endtime="20220303 20:57:47.631"/>
+</kw>
+<kw name="When User search for Brtiz" sourcename="User search for ${Search_text}">
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${Search_text}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220303 20:57:47.639" level="INFO">${Search_text} = Brtiz</msg>
+<status status="PASS" starttime="20220303 20:57:47.638" endtime="20220303 20:57:47.639"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${Locator_Search}</arg>
+<arg>${Search_text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220303 20:57:47.639" level="INFO">Typing text 'Brtiz' into text field 'name:q'.</msg>
+<status status="PASS" starttime="20220303 20:57:47.639" endtime="20220303 20:57:47.938"/>
+</kw>
+<kw name="Wait Until Element Does Not Contain" library="SeleniumLibrary">
+<arg>${Locator_Search}</arg>
+<arg>${Search_text}</arg>
+<doc>Waits until the element ``locator`` does not contain ``text``.</doc>
+<status status="PASS" starttime="20220303 20:57:47.938" endtime="20220303 20:57:47.982"/>
+</kw>
+<kw name="Press Keys" library="SeleniumLibrary">
+<arg>${Locator_Search}</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<msg timestamp="20220303 20:57:47.983" level="INFO">Sending key(s) ('RETURN',) to name:q element.</msg>
+<msg timestamp="20220303 20:57:48.307" level="INFO">Pressing special key RETURN to element.</msg>
+<msg timestamp="20220303 20:57:48.308" level="INFO">Releasing special key RETURN.</msg>
+<status status="PASS" starttime="20220303 20:57:47.982" endtime="20220303 20:57:50.743"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:47.635" endtime="20220303 20:57:50.744"/>
+</kw>
+<kw name="And User selects for Britz" sourcename="User selects for ${text}">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${related_matches}</var>
+<arg>Element Should Be Visible</arg>
+<arg>//*[@id="taw"]</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>//*[@id="taw"]</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20220303 20:57:51.593" level="INFO">Element '//*[@id="taw"]' is displayed.</msg>
+<status status="PASS" starttime="20220303 20:57:50.745" endtime="20220303 20:57:51.593"/>
+</kw>
+<msg timestamp="20220303 20:57:51.593" level="INFO">${related_matches} = True</msg>
+<status status="PASS" starttime="20220303 20:57:50.745" endtime="20220303 20:57:51.593"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${related_matches}</arg>
+<arg>Click Element</arg>
+<arg>xpath:.//i[contains(., '${text}')]</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath:.//i[contains(., '${text}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220303 20:57:51.594" level="INFO">Clicking element 'xpath:.//i[contains(., 'Britz')]'.</msg>
+<status status="PASS" starttime="20220303 20:57:51.594" endtime="20220303 20:57:52.549"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:51.593" endtime="20220303 20:57:52.549"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${related_matches}</arg>
+<arg>Wait Until Element Is Not Visible</arg>
+<arg>//*[@id="taw"]</arg>
+<arg>timeout=8secs</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Wait Until Element Is Not Visible" library="SeleniumLibrary">
+<arg>//*[@id="taw"]</arg>
+<arg>timeout=8secs</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" starttime="20220303 20:57:52.550" endtime="20220303 20:57:52.751"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:52.549" endtime="20220303 20:57:52.751"/>
+</kw>
+<status status="PASS" starttime="20220303 20:57:50.744" endtime="20220303 20:57:52.751"/>
+</kw>
+<kw name="Then Page should have link of britz.com" sourcename="Page should have link of ${Match_link_text_url}">
+<kw name="Get list of links on page for search text">
+<var>${list_links}</var>
+<arg>${Search_text}</arg>
+<kw name="Wait Until Location Contains" library="SeleniumLibrary">
+<arg>${match_text}</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" starttime="20220303 20:57:52.753" endtime="20220303 20:57:52.783"/>
+</kw>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220303 20:57:53.109" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-39.png"&gt;&lt;img src="selenium-screenshot-39.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220303 20:57:52.783" endtime="20220303 20:57:53.110"/>
+</kw>
+<kw name="Get WebElements" library="SeleniumLibrary">
+<var>${list_of_links}</var>
+<arg>partial link:${match_text}</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<msg timestamp="20220303 20:57:53.605" level="INFO">${list_of_links} = []</msg>
+<status status="PASS" starttime="20220303 20:57:53.110" endtime="20220303 20:57:53.605"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${text_url_in_links}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220303 20:57:53.606" level="INFO">${text_url_in_links} = []</msg>
+<status status="PASS" starttime="20220303 20:57:53.605" endtime="20220303 20:57:53.606"/>
+</kw>
+<for flavor="IN">
+<var>${x}</var>
+<value>@{list_of_links}</value>
+<status status="PASS" starttime="20220303 20:57:53.606" endtime="20220303 20:57:53.606"/>
+</for>
+<msg timestamp="20220303 20:57:53.606" level="INFO">${list_links} = []</msg>
+<status status="PASS" starttime="20220303 20:57:52.752" endtime="20220303 20:57:53.606"/>
+</kw>
+<kw name="Log List" library="Collections">
+<arg>${list_links}</arg>
+<doc>Logs the length and contents of the ``list`` using given ``level``.</doc>
+<msg timestamp="20220303 20:57:53.607" level="INFO">List is empty.</msg>
+<status status="PASS" starttime="20220303 20:57:53.606" endtime="20220303 20:57:53.607"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${list_links}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20220303 20:57:53.607" level="INFO">Length is 0</msg>
+<msg timestamp="20220303 20:57:53.609" level="FAIL">'[]' should not be empty.</msg>
+<status status="FAIL" starttime="20220303 20:57:53.607" endtime="20220303 20:57:53.609"/>
+</kw>
+<kw name="List Should Contain Value" library="Collections">
+<arg>${list_links}</arg>
+<arg>https://www.${Match_link_text_url}/nz/en</arg>
+<doc>Fails if the ``value`` is not found from ``list``.</doc>
+<status status="NOT RUN" starttime="20220303 20:57:53.610" endtime="20220303 20:57:53.610"/>
+</kw>
+<status status="FAIL" starttime="20220303 20:57:52.752" endtime="20220303 20:57:53.611"/>
+</kw>
+<status status="FAIL" starttime="20220303 20:57:47.455" endtime="20220303 20:57:53.611">'[]' should not be empty.</status>
+</test>
+<kw name="Close All Browsers" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" starttime="20220303 20:57:53.614" endtime="20220303 20:57:53.838"/>
+</kw>
+<doc>1. Navigate to https://google.co.nz
+2. Search by “Maui” should have a link to ‘maui-rentals.com’ in the returns results
+3. Search by “Brtiz” should have a link to ‘britz.com’ in the returns results</doc>
+<status status="FAIL" starttime="20220303 20:57:25.401" endtime="20220303 20:57:53.839"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="1" skip="0" id="s1" name="Test">Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
